@@ -1,4 +1,4 @@
-package com.supwisdom.institute.oasv.diffvalidation.test;
+package com.supwisdom.institute.oasv.diffvalidation.config;
 
 import com.supwisdom.institute.oasv.diffvalidation.api.*;
 import com.supwisdom.institute.oasv.diffvalidation.skeleton.components.*;
@@ -19,24 +19,14 @@ import com.supwisdom.institute.oasv.diffvalidation.skeleton.requestbody.RequestB
 import com.supwisdom.institute.oasv.diffvalidation.skeleton.response.ResponseContentDiffValidator;
 import com.supwisdom.institute.oasv.diffvalidation.skeleton.response.ResponseHeadersDiffValidator;
 import com.supwisdom.institute.oasv.diffvalidation.skeleton.responses.ResponsesResponsesDiffValidator;
-import com.supwisdom.institute.oasv.diffvalidation.api.SchemaCompareValidator;
-import com.supwisdom.institute.oasv.diffvalidation.api.SchemaDelValidator;
 import com.supwisdom.institute.oasv.diffvalidation.skeleton.schema.SchemaDiffValidatorEngine;
-import com.supwisdom.institute.oasv.diffvalidation.api.SchemaAddValidator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import java.util.List;
 
-/**
- * OAS测试骨架Configuration。包含
- * <ol>
- * <li>骨架DiffValidator，指只那些自己没有验证逻辑，只是将OAS Object属性交给对应OAS Validator校验的Validator</li>
- * <li>DefaultOasSpecDiffValidator</li>
- * </ol>
- */
 @Configuration
-public class OasDiffValidatorTestSkeletonConfiguration {
+public class OasDiffValidatorsSkeletonConfiguration {
 
   @Bean
   public OasSpecDiffValidator oasSpecDiffValidator(List<OpenApiDiffValidator> openApiDiffValidators) {

@@ -1,0 +1,40 @@
+openapi: "3.0.0"
+info:
+  version: 1.0.0
+  title: Swagger petstore
+  license:
+    name: MIT
+servers:
+  - url: http://petstore.swagger.io/v1
+paths:
+  /pets:
+    get:
+      summary: List all pets
+      operationId: listpets
+      responses:
+        '200':
+          description: A paged array of pets
+
+    post:
+      summary: List all pets
+      operationId: foo
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                foo:
+                  type: string
+                bar:
+                  type: string
+            encoding:
+              foo:
+                contentType: 'application/octet-stream'
+                allowReserved: true
+              bar:
+                contentType: 'application/octet-stream'
+                allowReserved: false
+      responses:
+        '200':
+          description: A paged array of pets

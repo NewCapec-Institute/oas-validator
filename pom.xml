@@ -34,7 +34,8 @@
     <module>oas-validator-test</module>
     <module>oas-validator-compliance</module>
     <module>oas-validator-compliance-spring</module>
-<!--    <module>oas-validator-compatibility</module>-->
+    <module>oas-validator-compatibility</module>
+    <module>oas-validator-compatibility-spring</module>
   </modules>
 
   <dependencyManagement>

@@ -11,27 +11,40 @@
   </parent>
 
   <groupId>com.supwisdom.institute</groupId>
-  <artifactId>oas-validator-compliance-spring</artifactId>
+  <artifactId>oas-validator-compatibility</artifactId>
+  <version>${parent.version}</version>
+
+  <properties>
+  </properties>
 
   <dependencies>
 
     <dependency>
       <groupId>com.supwisdom.institute</groupId>
-      <artifactId>oas-validator-compliance</artifactId>
+      <artifactId>oas-validator-core</artifactId>
       <version>${project.version}</version>
+    </dependency>
+
+    <!-- test deps -->
+    <dependency>
+      <groupId>com.supwisdom.institute</groupId>
+      <artifactId>oas-validator-test</artifactId>
+      <version>${project.version}</version>
+      <scope>test</scope>
     </dependency>
 
     <dependency>
       <groupId>com.supwisdom.institute</groupId>
       <artifactId>oas-validator-core-spring</artifactId>
       <version>${project.version}</version>
+      <scope>test</scope>
     </dependency>
 
     <dependency>
       <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter</artifactId>
+      <artifactId>spring-boot-starter-test</artifactId>
+      <scope>test</scope>
     </dependency>
-
   </dependencies>
 
   <build>
