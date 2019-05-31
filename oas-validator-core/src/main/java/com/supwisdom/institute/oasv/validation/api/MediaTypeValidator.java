@@ -1,6 +1,5 @@
 package com.supwisdom.institute.oasv.validation.api;
 
-import com.supwisdom.institute.oasv.validation.api.OasObjectValidator;
 import io.swagger.v3.oas.models.media.MediaType;
 
 /**
