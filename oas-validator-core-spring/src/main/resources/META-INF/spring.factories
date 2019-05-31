@@ -1,0 +1,3 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.supwisdom.institute.oasv.diffvalidation.config.OasDiffValidatorsSkeletonConfiguration,\
+com.supwisdom.institute.oasv.validation.config.OasValidatorsSkeletonConfiguration

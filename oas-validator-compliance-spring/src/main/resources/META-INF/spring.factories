@@ -1,0 +1,13 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.supwisdom.institute.oasv.compliance.config.ComponentsValidatorConfiguration,\
+com.supwisdom.institute.oasv.compliance.config.EncodingValidatorConfiguration,\
+com.supwisdom.institute.oasv.compliance.config.HeaderValidatorConfiguration,\
+com.supwisdom.institute.oasv.compliance.config.InfoValidatorConfiguration,\
+com.supwisdom.institute.oasv.compliance.config.OpenApiValidatorConfiguration,\
+com.supwisdom.institute.oasv.compliance.config.OperationValidatorConfiguration,\
+com.supwisdom.institute.oasv.compliance.config.ParameterValidatorConfiguration,\
+com.supwisdom.institute.oasv.compliance.config.PathsValidatorConfiguration,\
+com.supwisdom.institute.oasv.compliance.config.RequestBodyValidatorConfiguration,\
+com.supwisdom.institute.oasv.compliance.config.ResponseValidatorConfiguration,\
+com.supwisdom.institute.oasv.compliance.config.SchemaValidatorConfiguration,\
+com.supwisdom.institute.oasv.compliance.config.TagValidatorConfiguration
