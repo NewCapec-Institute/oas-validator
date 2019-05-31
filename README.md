@@ -4,6 +4,16 @@ OpenAPI V3 Spec校验工具。
 
 [TOC]
 
+## 项目结构
+
+* oas-validator-core，核心API及骨架实现
+* oas-validator-core-spring，骨架的Spring Boot Autoconfiguration
+* oas-validator-test，核心API的测试帮助类
+* oas-validator-compliance，合规性校验实现
+* oas-validator-compliance-spring，合规性校验的Spring Boot Autoconfiguration
+* oas-validator-compatibility，兼容性校验实现
+* oas-validator-compatibility-spring，兼容性校验实现的Spring Boot Autoconfiguration
+
 ## 合规性校验
 
 OAS必须符合[OAS 3.0.2规范][openapi-3.0.2]（比如属性的名称、REQUIED要求）。除此之外则是我们自己的定义的合规性检查。
@@ -392,8 +402,6 @@ PS. Encoding Object仅针对Request Body Object有用
 <a name="components-compatibility"></a>
 
 [Components Object][spec-components]定义的都是可复用OAS Object，而在检查兼容性的时候所有`$ref`都已被解析了，因此不需要对[Components Object][spec-components]的属性做兼容性检查。
-
-### 
 
 
 [spec-operation]: https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.2.md#operationObject
