@@ -1,4 +1,4 @@
-package com.supwisdom.institute.oasv.validation.test;
+package com.supwisdom.institute.oasv.validation.config;
 
 import com.supwisdom.institute.oasv.validation.api.*;
 import com.supwisdom.institute.oasv.validation.skeleton.components.*;
@@ -25,17 +25,14 @@ import org.springframework.context.annotation.Configuration;
 import java.util.List;
 
 /**
- * OAS测试骨架Configuration。包含
- * <ol>
- * <li>骨架Validator，指只那些自己没有验证逻辑，只是将OAS Object属性交给对应OAS Validator校验的Validator</li>
- * <li>DefaultOasSpecValidator</li>
- * </ol>
+ * OAS骨架Validator配置，骨架Validator只那些自己没有验证逻辑，只是将OAS Object属性交给对应OAS Validator校验的Validator
  */
 @Configuration
-public class OasValidatorTestSkeletonConfiguration {
+public class OasValidatorsSkeletonConfiguration {
 
   @Bean
-  public OasSpecValidator oasSpecValidator(List<OpenApiValidator> openApiValidators) {
+  public OasSpecValidator oasSpecValidator(
+    List<OpenApiValidator> openApiValidators) {
     return new DefaultOasSpecValidator(openApiValidators);
   }
 
