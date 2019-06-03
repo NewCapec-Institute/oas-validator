@@ -18,6 +18,10 @@
     <maven-compiler-plugin.version>3.3</maven-compiler-plugin.version>
     <maven.surefire.version>3.0.0-M3</maven.surefire.version>
 
+    <dockerfile-maven-plugin.version>1.4.8</dockerfile-maven-plugin.version>
+    <dockerfile.image.server>harbor.supwisdom.com</dockerfile.image.server>
+    <dockerfile.image.prefix>oas-validator</dockerfile.image.prefix>
+
     <skipTests>false</skipTests>
     <skipITs>${skipTests}</skipITs>
     <skipUTs>${skipTests}</skipUTs>
@@ -153,8 +157,36 @@
             </execution>
           </executions>
         </plugin>
+
+        <plugin>
+          <groupId>com.spotify</groupId>
+          <artifactId>dockerfile-maven-plugin</artifactId>
+          <version>${dockerfile-maven-plugin.version}</version>
+          <configuration>
+            <repository>${dockerfile.image.server}/${dockerfile.image.prefix}/${project.artifactId}</repository>
+            <tag>${project.version}</tag>
+            <useMavenSettingsForAuth>true</useMavenSettingsForAuth>
+            <buildArgs>
+              <JAR_FILE>${project.build.finalName}.${project.packaging}</JAR_FILE>
+              <VERSION>${project.version}</VERSION>
+              <NAME>${project.artifactId}</NAME>
+            </buildArgs>
+          </configuration>
+        </plugin>
+
       </plugins>
     </pluginManagement>
+
+
+    <plugins>
+      <plugin>
+        <groupId>com.spotify</groupId>
+        <artifactId>dockerfile-maven-plugin</artifactId>
+        <configuration>
+          <skip>true</skip>
+        </configuration>
+      </plugin>
+    </plugins>
     
   </build>
 </project>
