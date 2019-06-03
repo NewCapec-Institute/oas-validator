@@ -34,6 +34,7 @@ OAS必须符合[OAS 3.0.2规范][openapi-3.0.2]（比如属性的名称、REQUIE
 * `components`属性见[Components Object合规性检查](#components-compliance)
 * `tags`属性，至少提供一个[Tag Object][spec-tag]
   * 见[Tag Object合规性检查](#tag-compliance)
+* `security`属性，不允许提供
 
 ### Info Object [doc][spec-info]
 

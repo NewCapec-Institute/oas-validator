@@ -1,5 +1,6 @@
 package com.supwisdom.institute.oasv.compliance.config;
 
+import com.supwisdom.institute.oasv.compliance.validator.openapi.OpenApiSecurityEmptyValidator;
 import com.supwisdom.institute.oasv.compliance.validator.openapi.OpenApiTagNotEmptyValidator;
 import com.supwisdom.institute.oasv.compliance.validator.openapi.OpenApiVersionValidator;
 import com.supwisdom.institute.oasv.validation.api.OpenApiValidator;
@@ -17,6 +18,11 @@ public class OpenApiValidatorConfiguration {
   @Bean
   public OpenApiValidator openApiVersionValidator() {
     return new OpenApiVersionValidator();
+  }
+
+  @Bean
+  public OpenApiValidator openApiSecurityEmptyValidator() {
+    return new OpenApiSecurityEmptyValidator();
   }
 
 }

@@ -1,9 +1,6 @@
 package com.supwisdom.institute.oasv.compliance.config;
 
-import com.supwisdom.institute.oasv.compliance.validator.operation.OperationIdLowerCamelCaseValidator;
-import com.supwisdom.institute.oasv.compliance.validator.operation.OperationSummaryRequiredValidator;
-import com.supwisdom.institute.oasv.compliance.validator.operation.OperationTagsOnlyOneValidator;
-import com.supwisdom.institute.oasv.compliance.validator.operation.OperationTagsReferenceValidator;
+import com.supwisdom.institute.oasv.compliance.validator.operation.*;
 import com.supwisdom.institute.oasv.validation.api.OperationValidator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -31,4 +28,8 @@ public class OperationValidatorConfiguration {
     return new OperationTagsReferenceValidator();
   }
 
+  @Bean
+  public OperationValidator operationServersEmptyValidator() {
+    return new OperationServersEmptyValidator();
+  }
 }
