@@ -39,7 +39,7 @@
 
   <div class="container">
 
-    <h2>兼容性检查</h2>
+    <h2>兼容性检查 &nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 1rem;">[<a href="#" th:href="@{/doc/validator.html#header-n200}" target="_blank">文档</a>]</span> </h2>
     <span>对新旧两个版本的OAS做兼容性检查。</span><br/>
     <span>OAS可以使用[<a href="https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.2.md#reference-object" target="_blank">Reference Object</a>]来描述Spec，两个不同的OAS会出现描述不同但语义相同的情况。</span>
       <div class="" style="height: 20px;"></div>
@@ -52,6 +52,12 @@
       </div>
     </div>
   
+    <div class="" style="height: 20px;"></div>
+  
+    <div>
+      <code id="compatibilityViolations"></code>
+    </div>
+
     <div class="" style="height: 20px;"></div>
   
   </div>
@@ -73,6 +79,52 @@
       post(url, data, function(json) {
         console.log(json);
         
+
+        if (!json.acknowleged) {
+          alert('出错了');
+        }
+        
+        var data = json.data;
+        
+        var violations = data.violations;
+        
+        if (violations && violations.length == 0) {
+          alert('文档兼容');
+        }
+        
+        var compatibilityViolations = $("#compatibilityViolations");
+        compatibilityViolations.empty();
+        
+        $.each(violations, function(i) {
+          var violation = violations[i];
+          
+          var leftLocationPath = "";
+          if (violation.leftLocation) {
+            $.each(violation.leftLocation.path, function(j) {
+              var p = violation.leftLocation.path[j];
+              leftLocationPath += p.name+'.';
+            });
+            if (leftLocationPath.length > 0) {
+            	leftLocationPath = leftLocationPath.substring(0, leftLocationPath.length-1);
+            }
+          }
+          
+          var rightLocationPath = "";
+          if (violation.rightLocation) {
+            $.each(violation.rightLocation.path, function(j) {
+              var p = violation.rightLocation.path[j];
+              rightLocationPath += p.name+'.';
+            });
+            if (rightLocationPath.length > 0) {
+            	rightLocationPath = rightLocationPath.substring(0, rightLocationPath.length-1);
+            }
+          }
+
+          var errorInfo = leftLocationPath + " -> " + rightLocationPath + " : " + "< "+violation.error+" >";
+
+          compatibilityViolations.append(errorInfo);
+          compatibilityViolations.append("<br/>");
+        });
         
       });
     });

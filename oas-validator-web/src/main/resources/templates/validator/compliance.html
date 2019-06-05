@@ -39,7 +39,7 @@
 
   <div class="container">
     
-    <h2>合规性校验</h2>
+    <h2>合规性校验 &nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 1rem;">[<a href="#" th:href="@{/doc/validator.html#header-n20}" target="_blank">文档</a>]</span> </h2>
     <span>OAS必须符合[<a href="https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.2.md" target="_blank">OAS 3.0.2规范</a>]（比如属性的名称、REQUIED要求）。除此之外则是我们自己的定义的合规性检查。</span>
     <div class="" style="height: 20px;"></div>
   
@@ -50,6 +50,12 @@
       </div>
     </div>
     
+    <div class="" style="height: 20px;"></div>
+    
+    <div>
+      <code id="complianceViolations"></code>
+    </div>
+
     <div class="" style="height: 20px;"></div>
   
   </div>
@@ -71,6 +77,39 @@
       post(url, data, function(json) {
         console.log(json);
         
+        if (!json.acknowleged) {
+          alert('出错了');
+        }
+        
+        var data = json.data;
+        
+        var violations = data.violations;
+        
+        if (violations && violations.length == 0) {
+          alert('文档合规');
+        }
+        
+        var complianceViolations = $("#complianceViolations");
+        
+        complianceViolations.empty();
+        
+        $.each(violations, function(i) {
+          var violation = violations[i];
+          
+          var locationPath = "";
+          $.each(violation.location.path, function(j) {
+            var p = violation.location.path[j];
+            locationPath += p.name+'.';
+          });
+          if (locationPath.length > 0) {
+          	locationPath = locationPath.substring(0, locationPath.length-1);
+          }
+          
+          var errorInfo = ""+ locationPath + " : "+"< " + violation.error + " >";
+          
+          complianceViolations.append(errorInfo);
+          complianceViolations.append("<br/>");
+        });
         
       });
     });
