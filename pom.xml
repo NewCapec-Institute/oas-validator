@@ -18,6 +18,8 @@
     <maven-compiler-plugin.version>3.3</maven-compiler-plugin.version>
     <maven.surefire.version>3.0.0-M3</maven.surefire.version>
 
+    <repoAddress>https://app.supwisdom.com/nexus/content/repositories</repoAddress>
+
     <dockerfile-maven-plugin.version>1.4.8</dockerfile-maven-plugin.version>
     <dockerfile.image.server>harbor.supwisdom.com</dockerfile.image.server>
     <dockerfile.image.prefix>oas-validator</dockerfile.image.prefix>
@@ -42,6 +44,19 @@
     <module>oas-validator-compatibility-spring</module>
     <module>oas-validator-web</module>
   </modules>
+
+  <distributionManagement>
+    <repository>
+      <id>supwisdom-releases</id>
+      <name>internal release</name>
+      <url>${repoAddress}/releases</url>
+    </repository>
+    <snapshotRepository>
+      <id>supwisdom-snapshots</id>
+      <name>internal snapshots</name>
+      <url>${repoAddress}/snapshots</url>
+    </snapshotRepository>
+  </distributionManagement>
 
   <dependencyManagement>
     <dependencies>
