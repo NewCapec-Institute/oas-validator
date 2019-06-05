@@ -17,8 +17,8 @@
 
     <maven-compiler-plugin.version>3.3</maven-compiler-plugin.version>
     <maven.surefire.version>3.0.0-M3</maven.surefire.version>
-
-    <repoAddress>https://app.supwisdom.com/nexus/content/repositories</repoAddress>
+    <maven-source-plugin.version>3.0.1</maven-source-plugin.version>
+    <maven-javadoc-plugin.version>3.0.1</maven-javadoc-plugin.version>
 
     <dockerfile-maven-plugin.version>1.4.8</dockerfile-maven-plugin.version>
     <dockerfile.image.server>harbor.supwisdom.com</dockerfile.image.server>
@@ -45,18 +45,6 @@
     <module>oas-validator-web</module>
   </modules>
 
-  <distributionManagement>
-    <repository>
-      <id>supwisdom-releases</id>
-      <name>internal release</name>
-      <url>${repoAddress}/releases</url>
-    </repository>
-    <snapshotRepository>
-      <id>supwisdom-snapshots</id>
-      <name>internal snapshots</name>
-      <url>${repoAddress}/snapshots</url>
-    </snapshotRepository>
-  </distributionManagement>
 
   <dependencyManagement>
     <dependencies>
@@ -205,4 +193,95 @@
     </plugins>
     
   </build>
+
+  <profiles>
+    <profile>
+      <id>company-release</id>
+      <build>
+        <plugins>
+          <!-- Source -->
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-source-plugin</artifactId>
+            <version>${maven-source-plugin.version}</version>
+            <executions>
+              <execution>
+                <phase>package</phase>
+                <goals>
+                  <goal>jar-no-fork</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+          <!-- Javadoc -->
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-javadoc-plugin</artifactId>
+            <version>${maven-javadoc-plugin.version}</version>
+            <executions>
+              <execution>
+                <phase>package</phase>
+                <goals>
+                  <goal>jar</goal>
+                </goals>
+              </execution>
+            </executions>
+            <configuration>
+              <charset>UTF-8</charset>
+              <locale>zh_CN</locale>
+              <doclint>reference</doclint>
+            </configuration>
+          </plugin>
+          <!-- GPG -->
+          <!--
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-gpg-plugin</artifactId>
+            <version>1.6</version>
+            <executions>
+              <execution>
+                <id>sign-artifacts</id>
+                <phase>verify</phase>
+                <goals>
+                  <goal>sign</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+          -->
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
+
+  <repositories>
+    <repository>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+      <id>central</id>
+      <url>http://repo.maven.apache.org/maven2</url>
+    </repository>
+    <repository>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+      <id>supwisdom</id>
+      <url>http://app.supwisdom.com/nexus/content/groups/public/</url>
+    </repository>
+  </repositories>
+
+  <distributionManagement>
+    <repository>
+      <id>supwisdom-releases</id>
+      <name>internal release</name>
+      <url>https://app.supwisdom.com/nexus/content/repositories/releases</url>
+    </repository>
+    <snapshotRepository>
+      <id>supwisdom-snapshots</id>
+      <name>internal snapshots</name>
+      <url>https://app.supwisdom.com/nexus/content/repositories/snapshots</url>
+    </snapshotRepository>
+  </distributionManagement>
+
 </project>

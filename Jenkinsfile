@@ -32,7 +32,7 @@ pipeline {
           // 指定maven本地仓库路径为项目working dir下的.local-m2-reop，可以避免因并发构建导致本地仓库混乱的问题
           mavenLocalRepo: '.local-m2-repo'
         ) {
-          sh 'mvn -f ./ clean package -DskipTests -DskipITs'
+          sh 'mvn -f ./ clean install'
         }
       }
 
@@ -54,7 +54,7 @@ pipeline {
           // 只是Deploy，因此把所有options都关闭掉（默认是都开启的）
           publisherStrategy: 'EXPLICIT'
         ) {
-          sh 'mvn -f ./ deploy -DskipTests -DskipITs'
+          sh 'mvn -f ./ clean deploy -DskipTests -P company-release'
         }
       }
 
@@ -74,7 +74,7 @@ pipeline {
           mavenLocalRepo: '.local-m2-repo',
           publisherStrategy: 'EXPLICIT'
         ) {
-          sh 'mvn -f ./ clean package -DskipTests -DskipITs dockerfile:build dockerfile:push'
+          sh 'mvn -f ./ clean package -DskipTests dockerfile:build dockerfile:push'
         }
       }
 
@@ -93,7 +93,7 @@ pipeline {
     cleanup {
       // 清空workspace，节省Jenkins服务器磁盘空间
       echo 'Cleanup workspace'
-      withMaven(maven: 'Maven3', jdk: 'JDK8', mavenLocalRepo: '.local-m2-repo') {
+      withMaven(maven: 'Maven3', jdk: 'JDK8', mavenLocalRepo: '.local-m2-repo', publisherStrategy: 'EXPLICIT') {
         sh 'mvn -f ./ clean'
       }
 
