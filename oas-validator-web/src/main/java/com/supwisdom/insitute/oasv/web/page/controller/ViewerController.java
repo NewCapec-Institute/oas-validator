@@ -13,7 +13,7 @@ public class ViewerController {
     
     
     
-    return "/viewer/index";
+    return "viewer/index";
   }
 
 }

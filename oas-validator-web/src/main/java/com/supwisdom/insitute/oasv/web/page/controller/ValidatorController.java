@@ -13,7 +13,7 @@ public class ValidatorController {
     
     
     
-    return "/validator/index";
+    return "validator/index";
   }
 
   @GetMapping(path = "/compliance")
@@ -21,7 +21,7 @@ public class ValidatorController {
     
     
     
-    return "/validator/compliance";
+    return "validator/compliance";
   }
 
   @GetMapping(path = "/compatibility")
@@ -29,7 +29,7 @@ public class ValidatorController {
     
     
     
-    return "/validator/compatibility";
+    return "validator/compatibility";
   }
 
 }

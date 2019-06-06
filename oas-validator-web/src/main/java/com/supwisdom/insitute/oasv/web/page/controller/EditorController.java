@@ -13,7 +13,7 @@ public class EditorController {
     
     
     
-    return "/editor/index";
+    return "editor/index";
   }
 
 }
