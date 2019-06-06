@@ -83,6 +83,15 @@
         <plugin>
           <groupId>org.springframework.boot</groupId>
           <artifactId>spring-boot-maven-plugin</artifactId>
+          <executions>
+            <execution>
+              <id>boot-repackage</id>
+              <phase>package</phase>
+              <goals>
+                <goal>repackage</goal>
+              </goals>
+            </execution>
+          </executions>
           <configuration>
             <classifier>exec</classifier>
           </configuration>
@@ -171,7 +180,7 @@
             <tag>${project.version}</tag>
             <useMavenSettingsForAuth>true</useMavenSettingsForAuth>
             <buildArgs>
-              <JAR_FILE>${project.build.finalName}.${project.packaging}</JAR_FILE>
+              <JAR_FILE>${project.build.finalName}-exec.${project.packaging}</JAR_FILE>
               <VERSION>${project.version}</VERSION>
               <NAME>${project.artifactId}</NAME>
             </buildArgs>
@@ -183,6 +192,15 @@
 
 
     <plugins>
+
+      <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+        <configuration>
+          <skip>true</skip>
+        </configuration>
+      </plugin>
+
       <plugin>
         <groupId>com.spotify</groupId>
         <artifactId>dockerfile-maven-plugin</artifactId>
