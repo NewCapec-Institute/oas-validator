@@ -98,8 +98,8 @@ public class CompatibilityController {
 
     ParseOptions parseOptions = new ParseOptions();
     parseOptions.setResolve(true);
-    parseOptions.setResolveCombinators(false);
-    parseOptions.setResolveFully(false);
+    parseOptions.setResolveCombinators(true);
+    parseOptions.setResolveFully(true);
     parseOptions.setFlatten(false);
     return parseOptions;
 
