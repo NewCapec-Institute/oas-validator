@@ -41,8 +41,10 @@ pipeline {
     stage('Push nexus') {
 
       when {
-        // 只有当前分支是develop时才执行本Stage
-        branch 'develop'
+        anyOf {
+          branch 'master'
+          branch 'develop'
+        }
         beforeAgent true
       }
 
@@ -63,7 +65,10 @@ pipeline {
     stage ('Push harbor') {
 
       when {
-        branch 'develop'
+        anyOf {
+          branch 'master'
+          branch 'develop'
+        }
         beforeAgent true
       }
 
