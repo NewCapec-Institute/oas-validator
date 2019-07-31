@@ -15,10 +15,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.supwisdom.insitute.oasv.web.api.vo.CompatibilityYamlRequest;
 import com.supwisdom.institute.oasv.diffvalidation.api.OasDiffValidationContext;
 import com.supwisdom.institute.oasv.diffvalidation.api.OasDiffViolation;
 import com.supwisdom.institute.oasv.diffvalidation.api.OasSpecDiffValidator;
+import com.supwisdom.institute.oasv.util.DefaultOasSpecSyntaxChecker;
+import com.supwisdom.institute.oasv.util.OasSpecSyntaxChecker;
 
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.parser.OpenAPIV3Parser;
@@ -28,63 +29,50 @@ import io.swagger.v3.parser.core.models.SwaggerParseResult;
 @RestController
 @RequestMapping("/api/compatibility")
 public class CompatibilityController {
-  
+
+  private OasSpecSyntaxChecker oasSpecSyntaxChecker = new DefaultOasSpecSyntaxChecker();
+
   @Autowired
   private OasSpecDiffValidator oasSpecDiffValidator;
-  
 
   @PostMapping(consumes = MimeTypeUtils.TEXT_PLAIN_VALUE, produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
   @ResponseStatus(value = HttpStatus.OK)
   public Map<String, Object> validateOpenAPI(@RequestBody String yaml) {
     
-    //String leftYaml = compatibilityYamlRequest.getLeftYaml();
-    //String rightYaml = compatibilityYamlRequest.getRightYaml();
+    Map<String, Object> json = new HashMap<>();
+    
+    json.put("acknowleged", true);
+    json.put("data", doValidate(yaml));
+    
+    return json;
+  }
+
+
+  private ImportError2 doValidate(String yaml) {
+
+    ImportError2 importError = new ImportError2();
+
     String leftYaml = yaml.split("---\n")[0];
     String rightYaml = yaml.split("---\n")[1];
-    
+
+    importError.addLeftParseErrors(oasSpecSyntaxChecker.check(leftYaml));
+    importError.addRightParseErrors(oasSpecSyntaxChecker.check(rightYaml));
+
+    if (importError.isNotEmpty()) {
+      return importError;
+    }
+
     OpenAPI leftOpenAPI = loadByYaml(leftYaml);
     OpenAPI rightOpenAPI = loadByYaml(rightYaml);
-    
+
     List<OasDiffViolation> violations = oasSpecDiffValidator
-      .validate(createContext(leftOpenAPI, rightOpenAPI), leftOpenAPI, rightOpenAPI);
-
-    Map<String, Object> data = new HashMap<>();
-    data.put("violations", violations);
-
-    Map<String, Object> json = new HashMap<>();
-    
-    json.put("acknowleged", true);
-    json.put("data", data);
-    
-    return json;
+        .validate(createContext(leftOpenAPI, rightOpenAPI), leftOpenAPI, rightOpenAPI);
+    if (CollectionUtils.isNotEmpty(violations)) {
+      importError.addViolations(violations);
+    }
+    return importError;
   }
-  
-  
-  @PostMapping(consumes = MimeTypeUtils.APPLICATION_JSON_VALUE, produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
-  @ResponseStatus(value = HttpStatus.OK)
-  public Map<String, Object> validateOpenAPI(@RequestBody CompatibilityYamlRequest compatibilityYamlRequest) {
-    
-    String leftYaml = compatibilityYamlRequest.getLeftYaml();
-    String rightYaml = compatibilityYamlRequest.getRightYaml();
-    
-    OpenAPI leftOpenAPI = loadByYaml(leftYaml);
-    OpenAPI rightOpenAPI = loadByYaml(rightYaml);
-    
-    List<OasDiffViolation> violations = oasSpecDiffValidator
-      .validate(createContext(leftOpenAPI, rightOpenAPI), leftOpenAPI, rightOpenAPI);
 
-    Map<String, Object> data = new HashMap<>();
-    data.put("violations", violations);
-
-    Map<String, Object> json = new HashMap<>();
-    
-    json.put("acknowleged", true);
-    json.put("data", data);
-    
-    return json;
-  }
-  
-  
   private OpenAPI loadByYaml(String yaml) {
     OpenAPIV3Parser parser = new OpenAPIV3Parser();
     SwaggerParseResult parseResult = parser.readContents(yaml, null, createParseOptions());

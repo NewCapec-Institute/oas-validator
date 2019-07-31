@@ -15,7 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.supwisdom.insitute.oasv.web.api.vo.ComplianceYamlRequest;
+import com.supwisdom.institute.oasv.util.DefaultOasSpecSyntaxChecker;
+import com.supwisdom.institute.oasv.util.OasSpecSyntaxChecker;
 import com.supwisdom.institute.oasv.validation.api.OasSpecValidator;
 import com.supwisdom.institute.oasv.validation.api.OasValidationContext;
 import com.supwisdom.institute.oasv.validation.api.OasViolation;
@@ -24,12 +25,13 @@ import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.parser.OpenAPIV3Parser;
 import io.swagger.v3.parser.core.models.ParseOptions;
 import io.swagger.v3.parser.core.models.SwaggerParseResult;
-//import io.swagger.v3.parser.util.ClasspathHelper;
 
 @RestController
 @RequestMapping("/api/compliance")
 public class ComplianceController {
-  
+
+  private OasSpecSyntaxChecker oasSpecSyntaxChecker = new DefaultOasSpecSyntaxChecker();
+
   @Autowired
   private OasSpecValidator oasSpecValidator;
   
@@ -37,48 +39,35 @@ public class ComplianceController {
   @PostMapping(consumes = MimeTypeUtils.TEXT_PLAIN_VALUE, produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
   @ResponseStatus(value = HttpStatus.OK)
   public Map<String, Object> validateOpenAPI(@RequestBody String yaml) {
-    
-    //String yaml = ClasspathHelper.loadFileFromClasspath("/samples/petstore-openapi-wrong.yaml");
-    //String yaml = complianceYamlRequest.getYaml();
-    
-    OpenAPI openAPI = loadByYaml(yaml);
-    
-    List<OasViolation> violations = oasSpecValidator.validate(createContext(openAPI), openAPI);
 
-    Map<String, Object> data = new HashMap<>();
-    data.put("violations", violations);
-
+    ImportError importError = doValidate(yaml);
     Map<String, Object> json = new HashMap<>();
     
     json.put("acknowleged", true);
-    json.put("data", data);
+    json.put("data", importError);
     
     return json;
   }
-  
-  
-  @PostMapping(consumes = MimeTypeUtils.APPLICATION_JSON_VALUE, produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
-  @ResponseStatus(value = HttpStatus.OK)
-  public Map<String, Object> validateOpenAPI(@RequestBody ComplianceYamlRequest complianceYamlRequest) {
-    
-    //String yaml = ClasspathHelper.loadFileFromClasspath("/samples/petstore-openapi-wrong.yaml");
-    String yaml = complianceYamlRequest.getYaml();
-    
+
+
+  private ImportError doValidate(String yaml) {
+
+    ImportError importError = new ImportError();
+    importError.addParseErrors(oasSpecSyntaxChecker.check(yaml));
+    if (importError.isNotEmpty()) {
+      return importError;
+    }
+
     OpenAPI openAPI = loadByYaml(yaml);
-    
     List<OasViolation> violations = oasSpecValidator.validate(createContext(openAPI), openAPI);
+    if (CollectionUtils.isNotEmpty(violations)) {
+      importError.addViolations(violations);
+    }
 
-    Map<String, Object> data = new HashMap<>();
-    data.put("violations", violations);
-
-    Map<String, Object> json = new HashMap<>();
-    
-    json.put("acknowleged", true);
-    json.put("data", data);
-    
-    return json;
+    return importError;
   }
-  
+
+
   private OpenAPI loadByYaml(String yaml) {
     OpenAPIV3Parser parser = new OpenAPIV3Parser();
     SwaggerParseResult parseResult = parser.readContents(yaml, null, createParseOptions());

@@ -44,7 +44,7 @@
     <div class="" style="height: 20px;"></div>
   
     <div>
-      <textarea name="yaml" placeholder="OpenAPI Document（yaml）" style="width: 40%; height: 480px;"></textarea>
+      <textarea name="yaml" placeholder="OpenAPI Document（yaml）" style="width: 80%; height: 480px;"></textarea>
       <div>
       <button id="complianceValidate" class="btn btn-info">合规性校验</button>
       </div>
@@ -65,7 +65,23 @@
   <script type="text/javascript" src="" th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.js}"></script>
   
   <script type="text/javascript">
-  $(function(){
+
+    var addParseErrors = function(element, parseErrors) {
+
+      if (parseErrors && parseErrors.length > 0) {
+        element.append("Parse errors:");
+        element.append("<br/>");
+        $.each(parseErrors, function(i) {
+          var parseError = parseErrors[i];
+          element.append(parseError);
+          element.append("<br/>");
+        })
+        return false;
+      }
+      return true;
+    }
+
+    $(function(){
     
     $('#complianceValidate').on('click', function(e) {
       var url = "/api/compliance";
@@ -82,17 +98,19 @@
         }
         
         var data = json.data;
-        
+
+        var complianceViolations = $("#complianceViolations");
+        complianceViolations.empty();
+
+        if (!addParseErrors(complianceViolations, data.parseErrors)) {
+          return;
+        }
+
         var violations = data.violations;
-        
         if (violations && violations.length == 0) {
           alert('文档合规');
         }
-        
-        var complianceViolations = $("#complianceViolations");
-        
-        complianceViolations.empty();
-        
+
         $.each(violations, function(i) {
           var violation = violations[i];
           

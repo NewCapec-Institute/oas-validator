@@ -45,8 +45,8 @@
       <div class="" style="height: 20px;"></div>
     
     <div>
-      <textarea name="leftYaml" placeholder="旧 OpenAPI Document（yaml）" style="width: 40%; height: 480px;"></textarea>
-      <textarea name="rightYaml" placeholder="新 OpenAPI Document（yaml）" style="width: 40%; height: 480px;"></textarea>
+      <textarea name="leftYaml" placeholder="旧 OpenAPI Document（yaml）" style="width: 45%; height: 480px;"></textarea>
+      <textarea name="rightYaml" placeholder="新 OpenAPI Document（yaml）" style="width: 45%; height: 480px;"></textarea>
       <div>
       <button id="compatibilityValidate" class="btn btn-info">兼容性检查</button>
       </div>
@@ -66,6 +66,21 @@
   <script type="text/javascript" src="" th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.js}"></script>
   
   <script type="text/javascript">
+    var addParseErrors = function(element, title, parseErrors) {
+
+      if (parseErrors && parseErrors.length > 0) {
+        element.append(title + ' parse errors:');
+        element.append("<br/>");
+        $.each(parseErrors, function(i) {
+          var parseError = parseErrors[i];
+          element.append(parseError);
+          element.append("<br/>");
+        })
+        return false;
+      }
+      return true;
+    }
+
   $(function(){
     
     $('#compatibilityValidate').on('click', function(e) {
@@ -85,16 +100,22 @@
         }
         
         var data = json.data;
-        
+        var compatibilityViolations = $("#compatibilityViolations");
+        compatibilityViolations.empty();
+
+        if (!addParseErrors(compatibilityViolations, 'Old version', data.leftParseErrors)) {
+          return;
+        }
+        if (!addParseErrors(compatibilityViolations, 'New version', data.rightParseErrors)) {
+          return;
+        }
         var violations = data.violations;
         
         if (violations && violations.length == 0) {
           alert('文档兼容');
         }
         
-        var compatibilityViolations = $("#compatibilityViolations");
-        compatibilityViolations.empty();
-        
+
         $.each(violations, function(i) {
           var violation = violations[i];
           
