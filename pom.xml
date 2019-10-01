@@ -68,6 +68,7 @@
     <module>oas-validator-compatibility</module>
     <module>oas-validator-compatibility-spring</module>
     <module>oas-validator-web</module>
+    <module>distribution</module>
   </modules>
 
 
@@ -271,9 +272,23 @@
 
   <profiles>
     <profile>
-      <id>company-release</id>
+      <id>release</id>
       <build>
         <plugins>
+          <!-- <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-gpg-plugin</artifactId>
+            <version>1.6</version>
+            <executions>
+              <execution>
+                <id>sign-artifacts</id>
+                <phase>verify</phase>
+                <goals>
+                  <goal>sign</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin> -->
           <!-- Source -->
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
@@ -281,7 +296,8 @@
             <version>${maven-source-plugin.version}</version>
             <executions>
               <execution>
-                <phase>package</phase>
+                <!-- <phase>package</phase> -->
+                <id>attach-sources</id>
                 <goals>
                   <goal>jar-no-fork</goal>
                 </goals>
@@ -295,7 +311,8 @@
             <version>${maven-javadoc-plugin.version}</version>
             <executions>
               <execution>
-                <phase>package</phase>
+                <!-- <phase>package</phase> -->
+                <id>attach-javadocs</id>
                 <goals>
                   <goal>jar</goal>
                 </goals>
@@ -307,23 +324,6 @@
               <doclint>reference</doclint>
             </configuration>
           </plugin>
-          <!-- GPG -->
-          <!--
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-gpg-plugin</artifactId>
-            <version>1.6</version>
-            <executions>
-              <execution>
-                <id>sign-artifacts</id>
-                <phase>verify</phase>
-                <goals>
-                  <goal>sign</goal>
-                </goals>
-              </execution>
-            </executions>
-          </plugin>
-          -->
         </plugins>
       </build>
     </profile>
