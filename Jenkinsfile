@@ -38,52 +38,6 @@ pipeline {
 
     }
 
-    stage('Push nexus') {
-
-      when {
-        anyOf {
-          branch 'master'
-          branch 'develop'
-        }
-        beforeAgent true
-      }
-
-      steps {
-        withMaven(
-          maven: 'Maven3',
-          jdk: 'JDK8',
-          mavenLocalRepo: '.local-m2-repo',
-          // 只是Deploy，因此把所有options都关闭掉（默认是都开启的）
-          publisherStrategy: 'EXPLICIT'
-        ) {
-          sh 'mvn -f ./ clean deploy -DskipTests -P company-release'
-        }
-      }
-
-    }
-
-    stage ('Push harbor') {
-
-      when {
-        anyOf {
-          branch 'master'
-          branch 'develop'
-        }
-        beforeAgent true
-      }
-
-      steps {
-        withMaven(
-          maven: 'Maven3',
-          jdk: 'JDK8',
-          mavenLocalRepo: '.local-m2-repo',
-          publisherStrategy: 'EXPLICIT'
-        ) {
-          sh 'mvn -f ./ clean package -DskipTests dockerfile:build dockerfile:push'
-        }
-      }
-
-    }
 
   }
 

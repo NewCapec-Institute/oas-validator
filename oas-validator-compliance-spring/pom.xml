@@ -21,25 +21,25 @@
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
-    <groupId>com.supwisdom.institute</groupId>
+    <groupId>com.newcapec.institute</groupId>
     <artifactId>oas-validator-parent</artifactId>
     <version>0.2.0-SNAPSHOT</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
 
-  <groupId>com.supwisdom.institute</groupId>
+  <groupId>com.newcapec.institute</groupId>
   <artifactId>oas-validator-compliance-spring</artifactId>
 
   <dependencies>
 
     <dependency>
-      <groupId>com.supwisdom.institute</groupId>
+      <groupId>com.newcapec.institute</groupId>
       <artifactId>oas-validator-compliance</artifactId>
       <version>${project.version}</version>
     </dependency>
 
     <dependency>
-      <groupId>com.supwisdom.institute</groupId>
+      <groupId>com.newcapec.institute</groupId>
       <artifactId>oas-validator-core-spring</artifactId>
       <version>${project.version}</version>
     </dependency>

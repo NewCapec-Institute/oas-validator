@@ -21,18 +21,18 @@
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
-    <groupId>com.supwisdom.institute</groupId>
+    <groupId>com.newcapec.institute</groupId>
     <artifactId>oas-validator-parent</artifactId>
     <version>0.2.0-SNAPSHOT</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
 
-  <groupId>com.supwisdom.institute</groupId>
+  <groupId>com.newcapec.institute</groupId>
   <artifactId>oas-validator-web</artifactId>
   <version>${parent.version}</version>
   
   <properties>
-    <start-class>com.supwisdom.insitute.oasv.web.Application</start-class>
+    <start-class>com.newcapec.insitute.oasv.web.Application</start-class>
     
   </properties>
 
@@ -46,19 +46,19 @@
 
 
     <dependency>
-      <groupId>com.supwisdom.institute</groupId>
+      <groupId>com.newcapec.institute</groupId>
       <artifactId>oas-validator-core-spring</artifactId>
       <version>${project.version}</version>
     </dependency>
     
     <dependency>
-      <groupId>com.supwisdom.institute</groupId>
+      <groupId>com.newcapec.institute</groupId>
       <artifactId>oas-validator-compatibility-spring</artifactId>
       <version>${project.version}</version>
     </dependency>
 
     <dependency>
-      <groupId>com.supwisdom.institute</groupId>
+      <groupId>com.newcapec.institute</groupId>
       <artifactId>oas-validator-compliance-spring</artifactId>
       <version>${project.version}</version>
     </dependency>
@@ -119,14 +119,6 @@
       <plugin>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
-        <configuration>
-          <skip>false</skip>
-        </configuration>
-      </plugin>
-
-      <plugin>
-        <groupId>com.spotify</groupId>
-        <artifactId>dockerfile-maven-plugin</artifactId>
         <configuration>
           <skip>false</skip>
         </configuration>

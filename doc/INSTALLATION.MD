@@ -58,6 +58,6 @@ java -jar ./oas-validator-web/target/oas-validator-web-exec.jar
 docker run -d \
   --name oas-validator-web \
   -p 8080:8080 \
-  harbor.supwisdom.com/oas-validator/oas-validator-web:0.0.1-SNAPSHOT
+  harbor.newcapec.com/oas-validator/oas-validator-web:0.0.1-SNAPSHOT
 ```
 
