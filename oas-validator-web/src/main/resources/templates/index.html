@@ -20,7 +20,7 @@
 <head>
   <meta content="text/html;charset=UTF-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>The OpenAPI Specification Tools</title>
+  <title>The OpenAPI Specification Tools - Validator</title>
 
   <link href="asserts/css/bootstrap.min.css" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.css}" rel="stylesheet">
 </head>
@@ -35,22 +35,12 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
-        <li class="nav-item active">
-          <a class="nav-link" href="#" th:href="@{/}">首页 <span class="sr-only">(current)</span></a>
-        </li>
         <li class="nav-item">
-          <a class="nav-link" href="#" th:href="@{/viewer}">查看器</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#" th:href="@{/editor}">编辑器</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#" th:href="@{/validator}">验证器</a>
+          <a class="nav-link" href="#" th:href="@{/}">首页</a>
         </li>
       </ul>
     </div>
   </nav>
-
   
   <div style="height: 50px;"></div>
 
@@ -62,90 +52,25 @@
   <div class="card mb-3 ">
     <!-- <img src="..." class="card-img-top" alt="..."> -->
     <div class="card-body">
-      <h5 class="card-title">查看器</h5>
-      <p class="card-text">对 OpenAPI 文档的阅读</p>
-      <a href="#" th:href="@{/viewer}" class="btn btn-primary disabled" role="button" aria-disabled="true">敬请期待…</a>
+      <h5 class="card-title">合规性校验 &nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 1rem;">[<a href="#" th:href="@{/doc/validator.html#header-n20}" target="_blank">文档</a>]</span> </h5>
+      <p class="card-text">对OAS Yaml文档的内容做合规性校验</p>
+      <a href="#" th:href="@{/validator/compliance}" class="btn btn-primary">进入</a>
+      
     </div>
   </div>
   
   <div class="card mb-3 ">
     <!-- <img src="..." class="card-img-top" alt="..."> -->
     <div class="card-body">
-      <h5 class="card-title">编辑器</h5>
-      <p class="card-text">对 OpenAPI 文档的编辑</p>
-      <a href="#" th:href="@{/editor}" class="btn btn-primary disabled" role="button" aria-disabled="true">敬请期待…</a>
-    </div>
-  </div>
-
-  <div class="card mb-3 ">
-    <!-- <img src="..." class="card-img-top" alt="..."> -->
-    <div class="card-body">
-      <h5 class="card-title">验证器</h5>
-      <p class="card-text">对 OpenAPI 文档的验证</p>
-      <a href="#" th:href="@{/validator}" class="btn btn-primary">进入</a>
+      <h5 class="card-title">兼容性检查 &nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 1rem;">[<a href="#" th:href="@{/doc/validator.html#header-n200}" target="_blank">文档</a>]</span> </h5>
+      <p class="card-text">对新旧两个版本的OAS做兼容性检查。</p>
+      <a href="#" th:href="@{/validator/compatibility}" class="btn btn-primary">进入</a>
     </div>
   </div>
 
   </div>
   
   </div>
-  
-
-<script type="text/javascript" src="" th:src="@{/webjars/jquery/3.0.0/jquery.js}"></script>
-<script type="text/javascript" src="" th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.js}"></script>
-
-<script type="text/javascript">
-$(function(){
-  
-  $('#complianceValidate').on('click', function(e) {
-    var url = "/api/compliance";
-    
-    var yaml = $('textarea[name="yaml"]').val(); if (yaml=="") {return;}
-    
-    var data = yaml
-    
-    post(url, data, function(json) {
-      console.log(json);
-      
-      
-    });
-  });
-
-  $('#compatibilityValidate').on('click', function(e) {
-    var url = "/api/compatibility";
-
-    var rightYaml = $('textarea[name="rightYaml"]').val(); if (rightYaml=="") {return;}
-    var leftYaml = $('textarea[name="leftYaml"]').val(); if (leftYaml=="") {return;}
-    
-    var data = leftYaml + "\n---\n" + rightYaml;
-    
-    post(url, data, function(json) {
-      console.log(json);
-      
-      
-    });
-  });
-
-});
-
-function post(url, data, cb) {// application/json // text/plain
-  
-  $.ajax({
-    url: url, 
-    data: data,
-    type: 'post',
-    headers: {
-      "Accept": "application/json; charset=utf-8", 
-      "Content-Type": "text/plain; charset=utf-8"
-    },
-    success: function(json) {
-      cb(json);
-    }
-  });
-  
-}
-
-</script>
 
 </body>
 
