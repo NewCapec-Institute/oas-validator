@@ -21,7 +21,7 @@
 
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>com.newcapec.institute</groupId>
+  <groupId>org.apache.servicecomb.toolkit</groupId>
   <artifactId>oas-validator-parent</artifactId>
   <version>0.2.0-SNAPSHOT</version>
   <packaging>pom</packaging>
@@ -44,10 +44,6 @@
     <maven.surefire.version>3.0.0-M3</maven.surefire.version>
     <maven-source-plugin.version>3.0.1</maven-source-plugin.version>
     <maven-javadoc-plugin.version>3.0.1</maven-javadoc-plugin.version>
-
-    <dockerfile-maven-plugin.version>1.4.8</dockerfile-maven-plugin.version>
-    <dockerfile.image.server>harbor.newcapec.com</dockerfile.image.server>
-    <dockerfile.image.prefix>oas-validator</dockerfile.image.prefix>
 
     <skipTests>false</skipTests>
     <skipITs>${skipTests}</skipITs>
@@ -198,22 +194,6 @@
         </plugin>
 
         <plugin>
-          <groupId>com.spotify</groupId>
-          <artifactId>dockerfile-maven-plugin</artifactId>
-          <version>${dockerfile-maven-plugin.version}</version>
-          <configuration>
-            <repository>${dockerfile.image.server}/${dockerfile.image.prefix}/${project.artifactId}</repository>
-            <tag>${project.version}</tag>
-            <useMavenSettingsForAuth>true</useMavenSettingsForAuth>
-            <buildArgs>
-              <JAR_FILE>${project.build.finalName}-exec.${project.packaging}</JAR_FILE>
-              <VERSION>${project.version}</VERSION>
-              <NAME>${project.artifactId}</NAME>
-            </buildArgs>
-          </configuration>
-        </plugin>
-
-        <plugin>
           <groupId>org.codehaus.mojo</groupId>
           <artifactId>license-maven-plugin</artifactId>
           <version>1.19</version>
@@ -259,13 +239,6 @@
         </configuration>
       </plugin>
 
-      <plugin>
-        <groupId>com.spotify</groupId>
-        <artifactId>dockerfile-maven-plugin</artifactId>
-        <configuration>
-          <skip>true</skip>
-        </configuration>
-      </plugin>
     </plugins>
     
   </build>
