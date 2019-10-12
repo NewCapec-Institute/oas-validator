@@ -300,16 +300,16 @@ For details, see their respective project links.
 * unbescape (org.unbescape:unbescape:1.1.6.RELEASE - http://www.unbescape.org)
 * json-schema-core (com.github.java-json-tools:json-schema-core:1.2.8 - https://github.com/java-json-tools/json-schema-core)
 * json-schema-validator (com.github.java-json-tools:json-schema-validator:2.2.8 - https://github.com/box-metadata/json-schema-validator)
-* null (com.github.fge:btf:1.2 - https://github.com/fge/btf)
-* null (com.github.fge:jackson-coreutils:1.6 - https://github.com/fge/jackson-coreutils)
-* null (com.github.fge:json-patch:1.6 - https://github.com/fge/json-patch)
-* null (com.github.fge:msg-simple:1.1 - https://github.com/fge/msg-simple)
-* null (com.github.fge:uri-template:0.9 - https://github.com/fge/uri-template)
+* com.github.fge:btf (com.github.fge:btf:1.2 - https://github.com/fge/btf)
+* com.github.fge:jackson-coreutils (com.github.fge:jackson-coreutils:1.6 - https://github.com/fge/jackson-coreutils)
+* com.github.fge:json-patch (com.github.fge:json-patch:1.6 - https://github.com/fge/json-patch)
+* com.github.fge:msg-simple (com.github.fge:msg-simple:1.1 - https://github.com/fge/msg-simple)
+* com.github.fge:uri-template (com.github.fge:uri-template:0.9 - https://github.com/fge/uri-template)
 
 ===========================================================================
-This product bundles the following libraries which are licensed under the
+This product bundles JavaBeans Activation Framework which are licensed under the
 COMMON DEVELOPMENT AND DISTRIBUTION LICENSE (CDDL) v1.0.
-For details, see their respective project links.
+For details, see http://java.sun.com/products/javabeans/jaf/index.jsp
 You can find a copy of the License at licenses/LICENSE-cddl-v10
 
 * JavaBeans Activation Framework (JAF) (javax.activation:activation:1.1 - http://java.sun.com/products/javabeans/jaf/index.jsp)
@@ -327,13 +327,13 @@ You can find a copy of the License at licenses/LICENSE-cddl-gplv2
 ===========================================================================
 This product bundles Mozilla Rhino which is licensed under the
 Mozilla Public License, Version 2.0.
-For details, see their respective project links.
+For details, see https://developer.mozilla.org/en/Rhino
 You can find a copy of the License at licenses/LICENSE-mpl-v20
 
 * Mozilla Rhino (org.mozilla:rhino:1.7R4 - https://developer.mozilla.org/en/Rhino)
 
 ===========================================================================
-This product bundles Mozilla Rhino which is licensed under the
+This product bundles Webjars which is licensed under the
 MIT License.
 For details, see their respective project links.
 You can find a copy of the License at licenses/LICENSE-webjars
@@ -342,26 +342,33 @@ You can find a copy of the License at licenses/LICENSE-webjars
 * jquery (org.webjars:jquery:3.0.0 - http://webjars.org)
 
 ===========================================================================
-This product bundles Mozilla Rhino which is licensed under the
+This product bundles Animal Sniffer Annotations which is licensed under the
 MIT License.
-For details, see their respective project links.
+For details, see http://www.mojohaus.org/animal-sniffer/animal-sniffer-annotations
 You can find a copy of the License at licenses/LICENSE-mit-unknown
 
 * Animal Sniffer Annotations (org.codehaus.mojo:animal-sniffer-annotations:1.17 - http://www.mojohaus.org/animal-sniffer/animal-sniffer-annotations)
+
+===========================================================================
+This product bundles Checker Qual which is licensed under the
+MIT License.
+For details, see https://checkerframework.org
+You can find a copy of the License at licenses/LICENSE-mit-unknown
+
 * Checker Qual (org.checkerframework:checker-compat-qual:2.5.2 - https://checkerframework.org)
 
 ===========================================================================
-This product bundles Mozilla Rhino which is licensed under the
+This product bundles Mockito which is licensed under the
 MIT License.
-For details, see their respective project links.
+For details, see https://github.com/mockito/mockito
 You can find a copy of the License at licenses/LICENSE-mockito
 
 * mockito-core (org.mockito:mockito-core:2.23.4 - https://github.com/mockito/mockito)
 
 ===========================================================================
-This product bundles Mozilla Rhino which is licensed under the
+This product bundles SLF4J which is licensed under the
 MIT License.
-For details, see their respective project links.
+For details, see http://www.slf4j.org
 You can find a copy of the License at licenses/LICENSE-slf4j
 
 * JUL to SLF4J bridge (org.slf4j:jul-to-slf4j:1.7.26 - http://www.slf4j.org)
@@ -370,31 +377,31 @@ You can find a copy of the License at licenses/LICENSE-slf4j
 * SLF4J Extensions Module (org.slf4j:slf4j-ext:1.6.3 - http://www.slf4j.org)
 
 ===========================================================================
-This product bundles Mozilla Rhino which is licensed under the
+This product bundles Project Lombok which is licensed under the
 MIT License.
-For details, see their respective project links.
+For details, see https://projectlombok.org
 You can find a copy of the License at licenses/LICENSE-lombok
 
 * Project Lombok (org.projectlombok:lombok:1.18.6 - https://projectlombok.org)
 
 ===========================================================================
-This product bundles Mozilla Rhino which is licensed under the
+This product bundles JOpt Simple which is licensed under the
 MIT License.
-For details, see their respective project links.
+For details, see http://pholser.github.io/jopt-simple
 You can find a copy of the License at licenses/LICENSE-jopt
 
 * JOpt Simple (net.sf.jopt-simple:jopt-simple:5.0.3 - http://pholser.github.io/jopt-simple)
 
 ===========================================================================
-This product bundles Mozilla Rhino which is licensed under the
+This product bundles CAL10N which is licensed under the
 MIT License.
-For details, see their respective project links.
+For details, see http://cal10n.qos.ch/cal10n-api
 You can find a copy of the License at licenses/LICENSE-qos
 
 * Compiler assisted localization library (CAL10N) -    API (ch.qos.cal10n:cal10n-api:0.7.4 - http://cal10n.qos.ch/cal10n-api)
 
 ===========================================================================
-This product bundles Mozilla Rhino which is licensed under the
+This product bundles following libraries which is licensed under the
 Public Domain, per Creative Commons CC0.
 For details, see their respective project links.
 You can find a copy of the License at licenses/LICENSE-cc0
@@ -403,7 +410,7 @@ You can find a copy of the License at licenses/LICENSE-cc0
 * LatencyUtils (org.latencyutils:LatencyUtils:2.0.3 - http://latencyutils.github.io/LatencyUtils/)
 
 ===========================================================================
-This product bundles Mozilla Rhino which is licensed under the
+This product bundles following libraries which is licensed under the
 Eclipse Public License v1.0.
 For details, see their respective project links.
 You can find a copy of the License at licenses/LICENSE-epl-v10
@@ -413,18 +420,18 @@ You can find a copy of the License at licenses/LICENSE-epl-v10
 * JUnit (junit:junit:4.12 - http://junit.org)
 
 ===========================================================================
-This product bundles Mozilla Rhino which is licensed under the
+This product bundles Hamcrest which is licensed under the
 2-Clause BSD.
-For details, see their respective project links.
+For details, see https://github.com/hamcrest/JavaHamcrest
 You can find a copy of the License at licenses/LICENSE-hamcrest
 
 * Hamcrest Core (org.hamcrest:hamcrest-core:1.3 - https://github.com/hamcrest/JavaHamcrest/hamcrest-core)
 * Hamcrest library (org.hamcrest:hamcrest-library:1.3 - https://github.com/hamcrest/JavaHamcrest/hamcrest-library)
 
 ===========================================================================
-This product bundles Mozilla Rhino which is licensed under the
+This product bundles ASM Core which is licensed under the
 3-Clause BSD.
-For details, see their respective project links.
+For details, see http://asm.objectweb.org/asm/
 You can find a copy of the License at licenses/LICENSE-asm
 
 * ASM Core (org.ow2.asm:asm:5.0.4 - http://asm.objectweb.org/asm/)
